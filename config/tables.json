@@ -1,0 +1,46 @@
+{
+    "MasterTables":[
+        {
+            "toDB":["db1"],"SqlName":"friends1","SelectCondi":"",
+            "Statdir":"/friends/{plydbid}","Keyarray":[],
+            "Statidx":[],"Slaves":["db1.friends2"]
+        },
+        {
+            "toDB":["db1"],"SqlName":"guild","SelectCondi":"",
+            "Statdir":"/guilds/{guildid}","Keyarray":[],
+            "Statidx":[],"Slaves":["db1.guildmember","db1.guildlog"]
+        },
+        {
+            "toDB":["db1"],"SqlName":"players","SelectCondi":"[ORDER BY lastlogin DESC LIMIT 0]",
+            "Statdir":"/players/{plydbid}","Keyarray":[],"Statidx":["{openid}"],
+            "Slaves":["db1.rolcampwall","db1.rolcampnpc"]
+        }
+    ],
+    "SlaveTables":[
+        {
+            "toDB":["db1"],"SqlName":"friends2","SelectCondi":"plydbid={plydbid}",
+            "Statdir":"/friends/{plydbid}/{plydbid2}","Keyarray":[],
+            "Statidx":[],"Slaves":[]
+        },
+        {
+            "toDB":["db1"],"SqlName":"rolcampwall","SelectCondi":"plydbid={plydbid}",
+            "Statdir":"/players/{plydbid}/campwall/{wallpos}","Keyarray":[],
+            "Statidx":[],"Slaves":[]
+        },
+        {
+            "toDB":["db1"],"SqlName":"rolcampnpc","SelectCondi":"plydbid={plydbid}",
+            "Statdir":"/players/{plydbid}/campnpc/{campsn}","Keyarray":[],
+            "Statidx":[],"Slaves":[]
+        },
+        {
+            "toDB":["db1"],"SqlName":"guildmember","SelectCondi":"guildid={guildid}",
+            "Statdir":"/guilds/{guildid}/guildmembers/{plydbid}","Keyarray":[],
+            "Statidx":[],"Slaves":[]
+        },
+        {
+            "toDB":["db1"],"SqlName":"guildlog","SelectCondi":"guildid={guildid}",
+            "Statdir":"/guilds/{guildid}/guildlogs/{logid}","Keyarray":["param"],
+            "Statidx":[],"Slaves":[]
+        }
+    ]
+}
