@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package cache;
+
+option go_package = "github.com/wobusbz/messageid/cache";
+
+// CacheService provides Get, Set, and Delete operations for game data caching
+service CacheService {
+  // Get retrieves cached data by key
+  rpc Get(GetRequest) returns (GetResponse);
+  
+  // Set stores data in cache with the specified key
+  rpc Set(SetRequest) returns (SetResponse);
+  
+  // Delete removes data from cache by key
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+}
+
+// GetRequest contains the cache key to retrieve
+message GetRequest {
+  string key = 1;
+}
+
+// GetResponse contains the cached data or error information
+message GetResponse {
+  bool found = 1;
+  bytes data = 2;
+  string error = 3;
+}
+
+// SetRequest contains the key and data to cache
+message SetRequest {
+  string key = 1;
+  bytes data = 2;
+}
+
+// SetResponse indicates success or failure of the set operation
+message SetResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+// DeleteRequest contains the key to delete
+message DeleteRequest {
+  string key = 1;
+}
+
+// DeleteResponse indicates success or failure of the delete operation
+message DeleteResponse {
+  bool success = 1;
+  string error = 2;
+}
